@@ -6,6 +6,7 @@ import { createTransport } from "nodemailer";
 import { emailConstants, signInConstants } from "@/lib/constants";
 import validateEmail from "@/lib/email";
 import clientPromise from "@/lib/mongodb";
+import { htmlEmailTemplates } from "@/lib/templates";
 
 const authOptions: AuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -27,6 +28,8 @@ const authOptions: AuthOptions = {
           to: identifier,
           from: provider.from,
           subject: "Sign in to your account",
+          text: `Sign in to your account\n${url}\n\n`,
+          html: htmlEmailTemplates.signIn({ url, theme }),
         });
 
         const failed = result.rejected.concat(result.pending).filter(Boolean);
