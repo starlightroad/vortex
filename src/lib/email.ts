@@ -10,7 +10,7 @@ const validateEmail = async (email: string, sender?: string) => {
       validateMx: true,
       validateTypo: true,
       validateDisposable: true,
-      validateSMTP: true,
+      validateSMTP: false,
     });
 
     const data = {
