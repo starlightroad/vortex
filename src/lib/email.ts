@@ -27,7 +27,7 @@ const validateEmail = async (email: string, sender?: string) => {
   } catch (err) {
     const error = createError(err);
 
-    throw new Error(error.message);
+    throw error;
   }
 };
 
