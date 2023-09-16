@@ -8,8 +8,10 @@ import validateEmail from "@/lib/email";
 import clientPromise from "@/lib/mongodb";
 import { htmlEmailTemplates } from "@/lib/templates";
 
+const adapter = MongoDBAdapter(clientPromise);
+
 const authOptions: AuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
+  adapter,
   providers: [
     Email({
       server: {
@@ -56,11 +58,32 @@ const authOptions: AuthOptions = {
       throw new Error(signInConstants.SIGN_IN_FAILED);
     },
 
-    session({ session, user }) {
-      return {
-        ...session,
-        user,
-      };
+    async session({ session, user, newSession, trigger }) {
+      if (trigger === "update") {
+        if (newSession?.name || newSession?.name?.length === 0) {
+          adapter.updateUser &&
+            (await adapter.updateUser({
+              id: user.id,
+              name: (newSession.name.length && newSession.name) || null,
+            }));
+        }
+
+        if (newSession?.email) {
+          const { isEmailValid } = await validateEmail(newSession.email ?? "");
+
+          if (!isEmailValid) {
+            throw new Error(emailConstants.EMAIL_INVALID);
+          }
+
+          adapter.updateUser &&
+            (await adapter.updateUser({
+              id: user.id,
+              email: newSession.email,
+            }));
+        }
+      }
+
+      return session;
     },
   },
 
