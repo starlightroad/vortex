@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 
 import "@/assets/styles/globals.css";
 import SessionProvider from "@/providers/session";
+import authOptions from "@/lib/nextauth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ type AuthProps = {
 };
 
 export default async function AuthLayout({ children }: AuthProps) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if (session?.user) {
     redirect("/dashboard");
