@@ -6,3 +6,38 @@ datasource db {
   provider = "mongodb"
   url      = env("MONGODB_URI")
 }
+
+model Bill {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  @@map("bills")
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  expires      DateTime @db.Date
+  sessionToken String   @unique(map: "sessionToken_1")
+  userId       String   @db.ObjectId
+
+  @@map("sessions")
+}
+
+model Subscription {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  @@map("subscriptions")
+}
+
+model User {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  email         String   @unique(map: "email_1")
+  emailVerified DateTime @db.Date
+
+  @@map("users")
+}
+
+model VerificationToken {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  @@map("verification_tokens")
+}
