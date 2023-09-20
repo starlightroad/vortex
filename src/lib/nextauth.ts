@@ -1,14 +1,14 @@
 import type { AuthOptions } from "next-auth";
 import Email from "next-auth/providers/email";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import { createTransport } from "nodemailer";
 
 import { emailConstants, signInConstants } from "@/lib/constants";
 import validateEmail from "@/lib/email";
-import clientPromise from "@/lib/mongodb";
 import { htmlEmailTemplates } from "@/lib/templates";
+import prisma from "@/lib/prisma";
 
-const adapter = MongoDBAdapter(clientPromise);
+const adapter = PrismaAdapter(prisma);
 
 const authOptions: AuthOptions = {
   adapter,
