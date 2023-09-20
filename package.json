@@ -18,6 +18,7 @@
     "autoprefixer": "10.4.15",
     "class-variance-authority": "^0.7.0",
     "deep-email-validator": "^0.1.21",
+    "dotenv-cli": "^7.3.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
     "next": "13.4.19",
