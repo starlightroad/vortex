@@ -6,7 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma-migrate-dev": "npx dotenv -e .env.local -- prisma migrate dev",
+    "prisma-db-pull": "npx dotenv -e .env.local -- prisma db pull",
+    "prisma-db-push": "npx dotenv -e .env.local -- prisma db push",
+    "prisma-migrate-reset": "npx dotenv -e .env.local -- prisma migrate reset",
+    "prisma-db-seed": "npx dotenv -e .env.local -- prisma db seed",
+    "prisma-generate": "npx dotenv -e .env.local -- prisma generate",
+    "prisma-studio": "npx dotenv -e .env.local -- prisma studio",
+    "prisma-migrate-deploy": "npx dotenv -e .env.local -- prisma migrate deploy"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.0",
