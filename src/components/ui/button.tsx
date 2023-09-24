@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes } from "react";
 import { type VariantProps, cva } from "class-variance-authority";
 
 export const buttonStyles = cva(
-  '"inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",',
+  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",
   {
     variants: {
       variant: {
@@ -15,9 +15,9 @@ export const buttonStyles = cva(
         destructive: "bg-red-600 text-red-50 shadow-sm hover:bg-red-600/90",
       },
       size: {
-        sm: "h-8 px-3 py-2 rounded-md text-xs",
-        md: "h-9 px-4 py-2",
-        lg: "h-10 px-4 py-2 rounded-md",
+        sm: "h-8 px-3",
+        md: "h-10 px-4 py-2",
+        lg: "h-11 px-6",
         icon: "w-9 h-9",
       },
       width: {
@@ -26,7 +26,7 @@ export const buttonStyles = cva(
     },
     defaultVariants: {
       variant: "primary",
-      size: "sm",
+      size: "md",
     },
   },
 );
